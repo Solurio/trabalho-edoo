@@ -1,6 +1,6 @@
 #ifndef HOSPITAL_H
 #define HOSPITAL_H
-#include "paciente.h"
+#include "pessoa.h"
 #include <vector> 
 
 using namespace std;
