@@ -1,63 +1,72 @@
-#include <iostream> 
-#include "hospital.h"
-
+#include <iostream>
+#include "Hospital.h"
 using namespace std;
 
-
-int main()
-{
-    std::cout << "apresentando a aplicação do hospital" <<std::endl << std::endl;
-    bool desligar = false; 
-    int opcao;
-    long int id;
-    std::string nome;
-    short int idade;
-    std::string dia;
-
-    Paciente p1;
+int main() {
     Hospital h1;
+    bool sair = false;
 
+    while (!sair) {
+        cout << "\n=== Sistema de Monitoramento de Leitos ===\n";
+        cout << "1 - Criar hospital\n";
+        cout << "2 - Cadastrar paciente\n";
+        cout << "3 - Internar paciente\n";
+        cout << "4 - Liberar leito\n";
+        cout << "5 - Listar leitos\n";
+        cout << "6 - Listar pacientes\n";
+        cout << "7 - Relatório\n";
+        cout << "8 - Exportar JSON\n";
+        cout << "9 - Resetar hospital\n";
+        cout << "0 - Sair\n> ";
+        int op;
+        cin >> op;
 
-    while (desligar == false) {
-        std:: cout << "pressione 1: para registrar o paciente" <<std::endl; 
-        std:: cout << "pressione 2: para registrar o hospital" <<std::endl;
-        std:: cout << "pressione 3: para fechar a registrar no leito" << std::endl;
-        std:: cout << "pressione 4: fechar a aplicação" << std::endl;
-        std:: cin >> opcao;
-
-        switch (opcao){
-            case 1: 
-             std::cout << "Digite o ID do paciente: ";
-             std::cin >> id;
-             std::cout << "Digite o nome do paciente: ";
-             std::cin >> nome;
-             std::cout << "Digite a idade do paciente: ";
-             std::cin >> idade;
-             std::cout << "Digite o diagnóstico do paciente: ";
-             std::cin >> dia;
-             p1 = Paciente(id, nome, idade, dia);
-             break;
-
-            case 2:
-            h1 = Hospital();
-            std::cout << "Hospital registrado com 10 leitos." << std::endl;
-            break;
-
-            case 3:
-            h1.ocupar_leito(p1);
-            break;
-
-            case 4 :
-            desligar = true;
-            break;
-
-            default:
-            std::cout << "Opção inválida." << std::endl;
-            break;
-
+        switch (op) {
+            case 1: {
+                string nome;
+                int qtd;
+                cout << "Nome do hospital: ";
+                cin >> nome;
+                cout << "Qtd. de leitos: ";
+                cin >> qtd;
+                h1 = Hospital(nome, qtd);
+                break;
+            }
+            case 2: {
+                long int id;
+                string nome, diag;
+                short int idade;
+                cout << "ID: "; cin >> id;
+                cout << "Nome: "; cin >> nome;
+                cout << "Idade: "; cin >> idade;
+                cout << "Diagnóstico: "; cin >> diag;
+                h1.cadastrarPaciente(Paciente(id, nome, idade, diag));
+                break;
+            }
+            case 3: {
+                long int id;
+                int leito;
+                cout << "ID do paciente: "; cin >> id;
+                cout << "Número do leito: "; cin >> leito;
+                h1.internarPaciente(id, leito);
+                break;
+            }
+            case 4: {
+                int leito;
+                cout << "Número do leito: "; cin >> leito;
+                h1.liberarLeito(leito);
+                break;
+            }
+            case 5: h1.listarLeitos(); break;
+            case 6: h1.listarPacientes(); break;
+            case 7: h1.relatorio(); break;
+            case 8: h1.exportarJSON("hospital.json"); break;
+            case 9: h1.resetar(); break;
+            case 0: sair = true; break;
+            default: cout << "Opção inválida.\n";
         }
-
     }
-    
+
+    cout << "Encerrando sistema..." << endl;
     return 0;
 }
