@@ -1,0 +1,50 @@
+# === Editor / IDE ===
+.vscode/
+*.code-workspace
+
+# === Build artifacts ===
+build/
+bin/
+obj/
+out/
+dist/
+
+# Object files / executáveis / libs
+*.o
+*.obj
+*.a
+*.so
+*.dll
+*.dylib
+*.exe
+*.out
+
+# Precompiled headers
+*.gch
+*.pch
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+install_manifest.txt
+Makefile
+
+# Visual Studio / Windows
+*.sdf
+*.opensdf
+*.vcxproj*
+*.user
+*.suo
+*.ncb
+Thumbs.db
+
+# Mac
+.DS_Store
+
+# Temporary log
+*.log
+*.tmp
+*.swp
+*.~*
