@@ -148,4 +148,15 @@ public:
     }
 };
 
+void removerPacienteDoLeito(long int idPaciente) {
+    for (auto& l : leitos) {
+        if (l.ocupado && l.id_paciente == idPaciente) {
+            l.liberar();
+            cout << "Paciente " << idPaciente << " recebeu alta e deixou o leito.\n";
+            return;
+        }
+    }
+    cout << "Paciente não está internado.\n";
+}
+
 #endif
