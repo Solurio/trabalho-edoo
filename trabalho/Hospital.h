@@ -1,9 +1,11 @@
 #ifndef HOSPITAL_H
 #define HOSPITAL_H
 
-#include "Pessoa.h"
+#include "Paciente.h"
 #include <vector>
 #include <fstream>
+#include <iostream>
+using namespace std;
 
 class Leito {
 public:
@@ -34,6 +36,9 @@ public:
     Hospital(string nome = "Sem Nome", int qtdLeitos = 0) : nome(nome) {
         criarLeitos(qtdLeitos);
     }
+
+
+    vector<Paciente>& getPacientes() { return pacientes; }
 
     void criarLeitos(int qtd) {
         int inicio = leitos.size() + 1;
@@ -87,6 +92,17 @@ public:
         }
         l.liberar();
         cout << "Leito " << numLeito << " liberado." << endl;
+    }
+
+    void removerPacienteDoLeito(long int idPaciente) {
+        for (auto& l : leitos) {
+            if (l.ocupado && l.id_paciente == idPaciente) {
+                l.liberar();
+                cout << "Paciente " << idPaciente << " recebeu alta.\n";
+                return;
+            }
+        }
+        cout << "Paciente não está internado.\n";
     }
 
     void listarLeitos() const {
@@ -148,15 +164,5 @@ public:
     }
 };
 
-void removerPacienteDoLeito(long int idPaciente) {
-    for (auto& l : leitos) {
-        if (l.ocupado && l.id_paciente == idPaciente) {
-            l.liberar();
-            cout << "Paciente " << idPaciente << " recebeu alta e deixou o leito.\n";
-            return;
-        }
-    }
-    cout << "Paciente não está internado.\n";
-}
-
 #endif
+
