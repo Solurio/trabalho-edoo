@@ -17,6 +17,7 @@ int main() {
         cout << "7 - Relatório\n";
         cout << "8 - Exportar JSON\n";
         cout << "9 - Resetar hospital\n";
+        cout << "10 - Avaliar paciente\n";
         cout << "0 - Sair\n> ";
         int op;
         cin >> op;
@@ -62,6 +63,26 @@ int main() {
             case 7: h1.relatorio(); break;
             case 8: h1.exportarJSON("hospital.json"); break;
             case 9: h1.resetar(); break;
+            case 10: {
+                long int id;
+                cout << "ID do paciente para avaliação: ";
+                cin >> id;
+
+                bool encontrado = false;
+                for (auto& pac : h1.getPacientes()) {
+                    if (pac.getid() == id) {
+                        encontrado = true;
+                        Medico m("Carlos", 45, "Clínico Geral", "CRM-1234");
+                        m.avaliarPaciente(h1, pac);
+                        break;
+                    }
+                }
+
+                if (!encontrado) {
+                    cout << "Paciente não encontrado.\n";
+                }
+                break;
+            }
             case 0: sair = true; break;
             default: cout << "Opção inválida.\n";
         }
