@@ -18,7 +18,6 @@ public:
     }
     virtual ~Pessoa() {}
 
-    
     void setnome(const string& nome) { this->nome = nome; }
     string getnome() const { return nome; }
 
@@ -62,6 +61,8 @@ public:
     }
 };
 
+class Hospital;
+
 class Medico : public Pessoa {
 private:
     string especialidade;
@@ -94,6 +95,9 @@ public:
              << ", Especialidade: " << getespecialidade()
              << ", CRM: " << getcrm() << endl;
     }
+
+    bool avaliarPaciente(long int idPaciente, Hospital& h);
 };
 
 #endif
+
